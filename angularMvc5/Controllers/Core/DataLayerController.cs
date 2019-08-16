@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 
 namespace angularMvc5.Controllers.Core
 {
-    public class DataLayerController : Controller
+    public class DataLayerController
     {
         private const string connectionString = "data source=(localdb)\\MSSQLLocalDB; initial catalog=MyDB;Integrated Security=True";
 
@@ -36,6 +36,17 @@ namespace angularMvc5.Controllers.Core
                 }
             }
 
+        }
+        public IEnumerable<T> ExcuteObject<T>(string storedProcedureorCommandText, bool isStoredProcedure = true)
+        {
+            List<T> items = new List<T>();
+            var dataTable = Select(storedProcedureorCommandText, isStoredProcedure); //this will use the DataTable Select function
+            foreach (var row in dataTable.Rows)
+            {
+                T item = (T)Activator.CreateInstance(typeof(T), row);
+                items.Add(item);
+            }
+            return items;
         }
     }
 }
