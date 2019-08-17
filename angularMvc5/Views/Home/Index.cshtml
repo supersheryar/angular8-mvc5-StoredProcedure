@@ -5,10 +5,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width"/>
-    <title>Index</title>
+    <base href="/">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Angular MVC</title>
+    @Styles.Render("~/Content/Styles")
+
 </head>
 <body>
-    <div></div>
+    <div>
+        <app-root></app-root>
+    </div>
+    @Scripts.Render("~/Script/Bundles")
+
 </body>
 </html>
